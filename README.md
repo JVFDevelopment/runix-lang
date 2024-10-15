@@ -16,10 +16,10 @@
     }
 
 ### Classes and Inheritance
-     ```runix
-     class Animal {
-    function speak() {
-        print("Animal speaks")
+   ```runix
+   class Animal {
+   function speak() {
+   print("Animal speaks")
       }
     }
 
@@ -33,25 +33,8 @@
     d.speak()  // Output: Dog barks
 
 ### Compilation
-    ```bash
     gcc -o runix runix.c lexer.c parser.c interpreter.c
 
-### Running Runix Programs
-    ```bash
-    ./runix path/to/program.rnx
-
-### Licensing 
-Runix is open-source and available under the MIT License. 
-
-
-## Example Code
-
-### Hello, World
- 
-  ```runix
-   if morning then {
-     print("Good morning, world!")
-    }
 
 
 
