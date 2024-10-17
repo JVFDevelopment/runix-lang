@@ -4,20 +4,25 @@
 typedef enum {
     AST_NUMBER,
     AST_IDENTIFIER,
-    AST_ADD,
-    AST_SUBTRACT,
-    AST_WHILE_LOOP,     // New node type for `while` loops
-    AST_CONDITION       // Node type for conditions like <, >
+    AST_IF_STATEMENT,
+    AST_FUNCTION_DECLARATION,
+    AST_FUNCTION_CALL,
+    AST_CLASS_DECLARATION,
+    AST_CLASS_INHERITANCE,
+    AST_INTERFACE_DECLARATION,
+    AST_INTERFACE_IMPLEMENTATION
 } ASTNodeType;
 
 typedef struct ASTNode {
     ASTNodeType type;
-    int value;   // If it's a number node
-    char name[100]; // If it's an identifier
-    struct ASTNode* left;  // Left child
-    struct ASTNode* right; // Right child
-    struct ASTNode* condition; // For while loops, stores the loop condition
-    struct ASTNode* body;      // For while loops, stores the loop body
+    char name[100];             
+    struct ASTNode* parameters;
+    struct ASTNode* body;
+    struct ASTNode* return_value;
+    struct ASTNode* left;
+    struct ASTNode* right;
+    struct ASTNode* parent_class; 
+    struct ASTNode* interfaces;
 } ASTNode;
 
 #endif

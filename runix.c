@@ -1,48 +1,42 @@
 #include <stdio.h>
-#include "lexer.c"
-#include "parser.c"
-#include "ast.h"
+#include <stdlib.h>
+#include "lexer.h"
+#include "parser.h"
+#include "interpreter.h"
 
-// Evaluate an expression node
-int eval(ASTNode* node);
-
-// Evaluate a while loop
-void eval_while(ASTNode* node) {
-    while (eval(node->condition)) {
-        eval(node->body);
+// Entry point for Runix interpreter
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        printf("Usage: %s <source_file>\n", argv[0]);
+        return 1;
     }
-}
 
-// Evaluate the AST
-int eval(ASTNode* node) {
-    switch (node->type) {
-        case AST_NUMBER:
-            return node->value;
-        case AST_ADD:
-            return eval(node->left) + eval(node->right);
-        case AST_SUBTRACT:
-            return eval(node->left) - eval(node->right);
-        case AST_WHILE_LOOP:
-            eval_while(node);
-            return 0;
-        case AST_CONDITION:
-            if (node->type == AST_LT) {
-                return eval(node->left) < eval(node->right);
-            } else if (node->type == AST_GT) {
-                return eval(node->left) > eval(node->right);
-            }
-            return 0;
-        default:
-            return 0;
+    // Open the source file
+    FILE* source_file = fopen(argv[1], "r");
+    if (!source_file) {
+        printf("Error: Could not open file %s\n", argv[1]);
+        return 1;
     }
-}
 
-int main() {
-    const char* input = "while (x < 10) { x = x + 1; }";  // Example code
-    current_token = get_next_token(&input);
-    
-    ASTNode* ast = parse_statement(&input);
-    eval(ast);  // Execute the program
-    
+    // Read the source code into a buffer
+    fseek(source_file, 0, SEEK_END);
+    long file_size = ftell(source_file);
+    fseek(source_file, 0, SEEK_SET);
+
+    char* source_code = (char*)malloc(file_size + 1);
+    fread(source_code, 1, file_size, source_file);
+    source_code[file_size] = '\0';
+    fclose(source_file);
+
+    // Initialize lexer and parser
+    const char* input = source_code;
+    current_token = get_next_token(&input);  // Initialize the first token
+    ASTNode* program_node = parse_program(&input);
+
+    // Interpret the program
+    interpret(program_node);
+
+    // Cleanup
+    free(source_code);
     return 0;
 }
