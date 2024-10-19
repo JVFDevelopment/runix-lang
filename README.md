@@ -2,7 +2,7 @@
 
 ![Runix Logo](images/logo/runixlogo.jfif)
 
-**Runix** is a modern, lightweight, and extensible programming language designed for ease of use and flexibility.
+**Runix** ```.rmx``` is a modern, lightweight, and extensible programming language designed for ease of use and flexibility, Its primary use case is in game development.
 
 
 ## Features
@@ -13,7 +13,7 @@
 - **Classes and Inheritance**: Object-oriented programming with class inheritance.
 - **Interfaces**: Enforceable contracts for class methods.
 - **Error Handling**: Basic error handling with try-catch blocks.
-- **Game Development**: Core features for building 2D and 3D games
+
 
 ## New Game Development Features
 **Runix now includes core game development components:**
@@ -73,6 +73,30 @@ class Dog extends Animal {
 d = Dog()
 d.speak()  // Output: Dog barks
 ```
+
+   ## Language Reference
+
+   ### Basic Syntax
+
+   ```markdown
+   - Variables: `variable_name = value`
+   - Functions: `function function_name(parameters) { ... }`
+   - Conditionals: `if condition then { ... } else { ... }`
+   - Loops: `while condition { ... }`
+   ```
+
+   ### Built-in Functions
+
+   ```markdown
+   - `print(message)`: Output a message to the console
+   - `create_player()`: Create a player game object
+   - `create_enemy()`: Create an enemy game object
+   - `update_physics()`: Update the game's physics state
+   - `render_frame()`: Render a new frame in the game
+   - `play_audio()`: Play audio in the game
+   ```
+
+
 ## Game Development Examples/Features:
 
 ## Game Loop
@@ -117,5 +141,16 @@ Here’s how you can run a specific program:
 ./runix examples/hello_world.rnx
 ```
 
-### Contributing
-Contributions are welcome! Feel free to fork the repository, make improvements, and submit pull requests. You can also report issues or request new features via the issue tracker.
+   ## Contributing
+
+   We welcome contributions to Runix! Here's how you can help:
+
+   ```markdown
+   1. Fork the repository
+   2. Create a new branch for your feature or bug fix
+   3. Make your changes and commit them with clear, descriptive messages
+   4. Push your changes to your fork
+   5. Submit a pull request to the main repository
+   ```
+   Please ensure your code adheres to the existing style and includes appropriate tests and documentation. 
+   You can also report issues or request new features via the issue tracker.
