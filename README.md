@@ -59,6 +59,30 @@ class Dog extends Animal {
 d = Dog()
 d.speak()  // Output: Dog barks
 ```
+## Game Development Examples/Features:
+
+## Game Loop
+```runix
+while game_running {
+    handle_input()
+    update_game_state()
+    render_frame()
+}
+```
+
+## Input Handling
+```runix
+if key_down("SPACE") then {
+    player.jump()
+}
+```
+
+## Physics Engine
+```runix
+if player.collides_with(enemy) {
+    player.take_damage()
+}
+```
 
 ## Compilation
 To compile the Runix interpreter, use the following command:
