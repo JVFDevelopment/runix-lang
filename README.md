@@ -12,6 +12,20 @@
 - **Conditionals and Loops**: Supports `if-then` statements and `while` loops.
 - **Classes and Inheritance**: Object-oriented programming with class inheritance.
 - **Interfaces**: Enforceable contracts for class methods.
+- **Error Handling**: Basic error handling with try-catch blocks.
+- **Game Development**: Core features for building 2D and 3D games
+
+## New Game Development Features
+**Runix now includes core game development components:**
+
+- **Game Loop**: A game loop that continuously updates the game state and renders graphics.
+- **Graphics System**: Functions to initialize and render graphics.
+- **Input Handling**: Support for keyboard input and other devices.
+- **Physics Engine**: Basic object movement, collisions, and physical interactions.
+- **Audio System**: Play sounds and music during gameplay.
+- **Asset Management**: Load and manage textures, sounds, and other resources.
+- **Game Objects**: Create and manage in-game entities like players and enemies.
+
 
 ---
 
