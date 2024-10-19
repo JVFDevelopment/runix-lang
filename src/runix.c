@@ -49,7 +49,7 @@ int main() {
     handleError(error); // Handle the error if it occurred
 
     printf("Trying to divide 10 by 2:\n");
-    error = divide(10, 2); // This should not cause an error
+    error = divide(10, 2); 
     if (error == NULL) {
         printf("Division successful!\n");
     } else {
