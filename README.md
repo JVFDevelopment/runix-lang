@@ -13,16 +13,6 @@
 - **Classes and Inheritance**: Object-oriented programming with class inheritance.
 - **Interfaces**: Enforceable contracts for class methods.
 - **Error Handling**: Basic error handling with try-catch blocks.
-- **Game Development**: Core features for building 2D and 3D games, Including:
-   ```
-     - Game Loop
-     - Graphics System
-     - Input Handling
-     - Physics Engine
-     - Audio System
-     - Asset Management
-     - Game Objects
-   ```
 
 
 ## New Game Development Features
