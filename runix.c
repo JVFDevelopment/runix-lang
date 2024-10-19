@@ -1,42 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "lexer.h"
-#include "parser.h"
-#include "interpreter.h"
+#include <string.h>
+#include "lexer.h"      // Include lexer header
+#include "parser.h"     // Include parser header
+#include "interpreter.h" // Include interpreter header
 
-// Entry point for Runix interpreter
-int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        printf("Usage: %s <source_file>\n", argv[0]);
-        return 1;
+typedef struct Error {
+    char *message;
+} Error;
+
+// Function to handle errors
+void handleError(Error *error) {
+    if (error != NULL) {
+        printf("An error occurred: %s\n", error->message);
+        free(error);
+    }
+}
+
+// Function to simulate a risky operation
+void riskyOperation() {
+    Error *error = malloc(sizeof(Error));
+    // Simulate an error
+    error->message = "Something went wrong!";
+    handleError(error);
+}
+
+// Function that divides two numbers and throws an error if the denominator is zero
+Error* divide(int numerator, int denominator) {
+    if (denominator == 0) {
+        Error *error = malloc(sizeof(Error));
+        error->message = "Error: Division by zero!";
+        return error; // Return the error
+    }
+    // Return NULL if no error occurs (successful division)
+    return NULL;
+}
+
+// Main function for executing code
+int main() {
+    printf("Running Runix program...\n");
+
+    // Example of a simple function
+    printf("Hello, World! from Runix.\n");
+
+    // Simulating try-catch with the divide function
+    printf("Trying to divide 10 by 0:\n");
+    Error *error = divide(10, 0); // This will cause an error
+    handleError(error); // Handle the error if it occurred
+
+    printf("Trying to divide 10 by 2:\n");
+    error = divide(10, 2); // This should not cause an error
+    if (error == NULL) {
+        printf("Division successful!\n");
+    } else {
+        handleError(error);
     }
 
-    // Open the source file
-    FILE* source_file = fopen(argv[1], "r");
-    if (!source_file) {
-        printf("Error: Could not open file %s\n", argv[1]);
-        return 1;
-    }
-
-    // Read the source code into a buffer
-    fseek(source_file, 0, SEEK_END);
-    long file_size = ftell(source_file);
-    fseek(source_file, 0, SEEK_SET);
-
-    char* source_code = (char*)malloc(file_size + 1);
-    fread(source_code, 1, file_size, source_file);
-    source_code[file_size] = '\0';
-    fclose(source_file);
-
-    // Initialize lexer and parser
-    const char* input = source_code;
-    current_token = get_next_token(&input);  // Initialize the first token
-    ASTNode* program_node = parse_program(&input);
-
-    // Interpret the program
-    interpret(program_node);
-
-    // Cleanup
-    free(source_code);
     return 0;
 }
