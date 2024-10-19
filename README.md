@@ -2,7 +2,7 @@
 
 ![Runix Logo](images/logo/runixlogo.jfif)
 
-**Runix** ```.rmx``` is a modern, lightweight, and extensible programming language designed for ease of use and flexibility, Its primary use case is in game development.
+**Runix** ```.rnx``` is a modern, lightweight, and extensible programming language designed for ease of use and flexibility, Its primary use case is in game development.
 
 
 ## Features
