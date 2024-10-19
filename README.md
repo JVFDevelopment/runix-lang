@@ -1,6 +1,6 @@
 # Runix Programming Language
 
-![Runix Logo](https://cdn.gencraft.com/prod/user/f8a7b39e-75b1-42d8-ac9a-616cc987b147/46f33db6-2797-40f8-a2e7-c33c1000e876/image/image0_0.jpg?Expires=1729118090&Signature=LKGaP2DTCIYpBldPGCgFd4uaT~p4M4PfAYLX7qTyJJH9q2ZFKy4kjv~32o56bV208QLd96nvoKx-t3gRkjbMipgQPeJ~~id9yypBCVTd5uic4FfDT5Dsl0k2zzkm7k9bu5K~NmyfbMAR5Y4SOAfLw9JyGD364qOG4V1ToKUy98peIMG68UQjinG3aRuQRbKidT7RKnii~cw8PBNm7yj5L-cZbcC2QuyVrSu9R6JSmYhWUk-N7GIoDnqlty5y1VWwEZdG4mLYjbhhb5zc4TUIVOrso5Hkg-llbeRMHtF20LYBDB1U5GhkQFjKTTdicf6IhyW8Ng9Fbf9t3wHjIOcUeQ__&Key-Pair-Id=K3RDDB1TZ8BHT8)
+![Runix Logo](images/logo/runixlogo.jfif)
 
 **Runix** is a modern, lightweight, and extensible programming language designed for ease of use and flexibility.
 
