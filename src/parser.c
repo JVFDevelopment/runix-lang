@@ -4,107 +4,69 @@
 #include "tokens.h"
 #include "ast.h"
 
+// Global variable to hold the current token
 extern Token current_token;
-Token get_next_token(const char** input);
 
+// Function prototypes for token handling and parsing
+Token get_next_token(const char** input);
 ASTNode* parse_expression(const char** input);
 ASTNode* parse_statement(const char** input);
 ASTNode* parse_if_statement(const char** input);
+void handle_parse_error(const char *message);
 
-// Parse an interface declaration
-ASTNode* parse_interface_declaration(const char** input) {
+// Function to parse a module declaration
+ASTNode* parse_module_declaration(const char** input) {
     ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_INTERFACE_DECLARATION;
+    node->type = AST_MODULE_DECLARATION;
 
     current_token = get_next_token(input);
-
+    
     if (current_token.type != TOKEN_IDENTIFIER) {
-        printf("Error: Expected interface name\n");
-        exit(1);
+        handle_parse_error("Expected module name");
     }
     strncpy(node->name, current_token.value, sizeof(node->name));
-    current_token = get_next_token(input);
 
+    current_token = get_next_token(input);
     if (current_token.type != TOKEN_LBRACE) {
-        printf("Error: Expected '{'\n");
-        exit(1);
+        handle_parse_error("Expected '{' after module name");
     }
-    current_token = get_next_token(input);
 
-    node->body = NULL;
+    // Parse the contents of the module here (e.g., functions, classes)
+    node->body = NULL; // Initialize the body (linked list, etc.)
 
     while (current_token.type != TOKEN_RBRACE) {
         current_token = get_next_token(input);
     }
 
     current_token = get_next_token(input);
-
     return node;
 }
 
-// Parse a class that implements interfaces
-ASTNode* parse_class_declaration(const char** input) {
+// Function to parse a namespace declaration
+ASTNode* parse_namespace_declaration(const char** input) {
     ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_CLASS_DECLARATION;
+    node->type = AST_NAMESPACE_DECLARATION;
 
     current_token = get_next_token(input);
-
+    
     if (current_token.type != TOKEN_IDENTIFIER) {
-        printf("Error: Expected class name\n");
-        exit(1);
+        handle_parse_error("Expected namespace name");
     }
     strncpy(node->name, current_token.value, sizeof(node->name));
+
     current_token = get_next_token(input);
-
-    if (current_token.type == TOKEN_EXTENDS) {
-        current_token = get_next_token(input);
-        if (current_token.type != TOKEN_IDENTIFIER) {
-            printf("Error: Expected parent class name\n");
-            exit(1);
-        }
-        ASTNode* parent_class_node = (ASTNode*)malloc(sizeof(ASTNode));
-        parent_class_node->type = AST_IDENTIFIER;
-        strncpy(parent_class_node->name, current_token.value, sizeof(parent_class_node->name));
-        node->parent_class = parent_class_node;
-        current_token = get_next_token(input);
-    } else {
-        node->parent_class = NULL;
-    }
-
-    if (current_token.type == TOKEN_IMPLEMENTS) {
-        current_token = get_next_token(input);
-        node->interfaces = NULL;
-
-        while (current_token.type == TOKEN_IDENTIFIER) {
-            ASTNode* interface_node = (ASTNode*)malloc(sizeof(ASTNode));
-            interface_node->type = AST_IDENTIFIER;
-            strncpy(interface_node->name, current_token.value, sizeof(interface_node->name));
-
-            interface_node->body = node->interfaces;
-            node->interfaces = interface_node;
-
-            current_token = get_next_token(input);
-
-            if (current_token.type == TOKEN_COMMA) {
-                current_token = get_next_token(input);
-            }
-        }
-    }
-
     if (current_token.type != TOKEN_LBRACE) {
-        printf("Error: Expected '{'\n");
-        exit(1);
+        handle_parse_error("Expected '{' after namespace name");
     }
-    current_token = get_next_token(input);
 
-    node->body = NULL;
+    // Parse the contents of the namespace here (e.g., classes, interfaces)
+    node->body = NULL; // Initialize the body (linked list, etc.)
 
     while (current_token.type != TOKEN_RBRACE) {
         current_token = get_next_token(input);
     }
 
     current_token = get_next_token(input);
-
     return node;
 }
 
@@ -115,8 +77,23 @@ ASTNode* parse_program(const char** input) {
     root->body = NULL;
 
     while (current_token.type != TOKEN_EOF) {
-        ASTNode* statement = parse_statement(input);
+        if (current_token.type == TOKEN_MODULE) {
+            ASTNode* module_node = parse_module_declaration(input);
+            // Add module_node to root->body
+        } else if (current_token.type == TOKEN_NAMESPACE) {
+            ASTNode* namespace_node = parse_namespace_declaration(input);
+            // Add namespace_node to root->body
+        } else {
+            ASTNode* statement = parse_statement(input);
+            // Add the statement to the program's body (linked list, array, etc.)
+        }
     }
 
     return root;
+}
+
+// Function to handle parsing errors
+void handle_parse_error(const char *message) {
+    fprintf(stderr, "Parse Error: %s\n", message);
+    exit(EXIT_FAILURE);
 }

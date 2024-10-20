@@ -3,7 +3,12 @@
 #include "tokens.h"
 
 // Function to create a new token
-Token create_token(TokenType type, const char* value);
+Token create_token(TokenType type, const char* value) {
+    Token token;
+    token.type = type;
+    strncpy(token.value, value, sizeof(token.value));
+    return token;
+}
 
 // Lexer function to identify and return tokens
 Token get_next_token(const char** input) {
@@ -30,6 +35,8 @@ Token get_next_token(const char** input) {
         if (strcmp(buffer, "extends") == 0) return create_token(TOKEN_EXTENDS, "extends");
         if (strcmp(buffer, "interface") == 0) return create_token(TOKEN_INTERFACE, "interface");
         if (strcmp(buffer, "implements") == 0) return create_token(TOKEN_IMPLEMENTS, "implements");
+        if (strcmp(buffer, "module") == 0) return create_token(TOKEN_MODULE, "module");
+        if (strcmp(buffer, "namespace") == 0) return create_token(TOKEN_NAMESPACE, "namespace");
         
         return create_token(TOKEN_IDENTIFIER, buffer);
     }

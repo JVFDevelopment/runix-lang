@@ -2,7 +2,6 @@
 #define TOKENS_H
 
 typedef enum {
-    TOKEN_EOF,
     TOKEN_IDENTIFIER,
     TOKEN_IF,
     TOKEN_THEN,
@@ -16,7 +15,11 @@ typedef enum {
     TOKEN_RBRACE,
     TOKEN_LPAREN,
     TOKEN_RPAREN,
-    TOKEN_COMMA
+    TOKEN_COMMA,
+    TOKEN_MODULE,
+    TOKEN_NAMESPACE,
+    TOKEN_EOF,
+    // Add other tokens as necessary
 } TokenType;
 
 typedef struct {
@@ -24,4 +27,7 @@ typedef struct {
     char value[100];
 } Token;
 
-#endif
+// Function to create a new token
+Token create_token(TokenType type, const char* value);
+
+#endif // TOKENS_H
