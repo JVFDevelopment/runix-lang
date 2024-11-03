@@ -1,18 +1,28 @@
-#ifndef MODULE_H
-#define MODULE_H
+#ifndef MODULES_H
+#define MODULES_H
 
-typedef struct {
-    char *name;
-    char **functions;
-    char **variables;
-} Module;
+typedef int (*FunctionPtr)(int, int);
 
+// Define the Namespace struct
 typedef struct {
-    char *namespace;
-    Module *module;
+    char name[50];
+    FunctionPtr functions[MAX_FUNCTIONS];
+    char function_names[MAX_FUNCTIONS][50];
+    int function_count;
 } Namespace;
 
-void load_module(const char *filename);
-void register_namespace(const char *name, Module *module);
+// Define the Module struct
+typedef struct {
+    char name[50];
+    Namespace* namespaces[MAX_NAMESPACES];
+    int namespace_count;
+} Module;
 
-#endif // MODULE_H
+// Function declarations
+Namespace* create_namespace(const char* name);
+void add_function(Namespace* ns, const char* func_name, FunctionPtr func);
+Module* create_module(const char* name);
+void add_namespace(Module* mod, Namespace* ns);
+FunctionPtr get_function(Namespace* ns, const char* func_name);
+
+#endif // MODULES_H
